@@ -1,0 +1,17 @@
+# Quellmaterial — bleibt lokal, gehört nicht auf die Vorschau
+/*.mp4
+/Logo.png
+/assets-raw/
+/Reviews/
+
+# Interne Arbeitsunterlagen
+/PROMPT.md
+/CLAUDE.md
+/deeplinks.txt
+/index-v1-alt.html
+/.claude/
+
+# Werkzeuge
+Thumbs.db
+desktop.ini
+.DS_Store

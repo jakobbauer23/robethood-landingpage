@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Datenschutzerklärung</title>
+<meta name="description" content="Welche Daten diese Website verarbeitet, warum, auf welcher Rechtsgrundlage — und welche Rechte du hast.">
+<meta name="robots" content="index,follow">
+<style>
+/* ============ Tokens ============ */
+:root{
+  --bg:#FFFFFF;
+  --surface:#F4F6F8;
+  --ink:#16202B;
+  --ink-muted:#5A6672;
+  --line:#DDE3E9;
+  --focus:#0B7A5A;
+
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+  --fs-h1:33px;
+  --fs-h2:27px;
+  --fs-h3:21px;
+  --fs-body:17px;
+  --fs-small:15px;
+  --fs-legal:14px;
+
+  --sp-1:8px;
+  --sp-2:16px;
+  --sp-3:24px;
+  --sp-4:32px;
+  --sp-6:48px;
+  --sp-8:64px;
+  --sp-10:80px;
+
+  --gutter:max(20px,env(safe-area-inset-left),env(safe-area-inset-right));
+}
+@media (min-width:768px){
+  :root{--fs-h1:42px;--fs-h2:33px;--fs-body:18px}
+}
+
+/* ============ Grundgerüst ============ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font);
+  font-size:var(--fs-body);
+  line-height:1.6;
+  padding-bottom:var(--sp-8);
+}
+h1,h2,h3,p,ul,ol{margin:0}
+ul{padding:0}
+a{color:inherit}
+
+h1{font-size:var(--fs-h1);line-height:1.15;font-weight:700}
+h2{font-size:var(--fs-h2);line-height:1.2;font-weight:700}
+h3{font-size:var(--fs-h3);line-height:1.3;font-weight:600}
+p{font-size:var(--fs-body);line-height:1.6}
+
+a:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+
+.container{
+  width:100%;
+  max-width:34em;
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+
+.link-secondary{
+  color:var(--ink);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  font-size:17px;
+  padding:12px 0;
+  display:inline-block;
+}
+
+.top{padding-top:var(--sp-2)}
+.page{margin-top:var(--sp-4)}
+.flow>*+*{margin-top:var(--sp-2)}
+.flow>h2{margin-top:var(--sp-8)}
+.flow>h2+*{margin-top:var(--sp-4)}
+.flow>h1+*{margin-top:var(--sp-4)}
+
+address{font-style:normal}
+.bullets{padding-left:1.2em;list-style:disc}
+.bullets li+li{margin-top:var(--sp-1)}
+.bullets li::marker{color:var(--ink-muted)}
+.legal{font-size:var(--fs-legal);line-height:1.5;color:var(--ink-muted)}
+
+.site-footer{
+  margin-top:var(--sp-8);
+  border-top:1px solid var(--line);
+  padding-top:var(--sp-4);
+}
+.footer-meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:var(--sp-1) var(--sp-2);
+  margin-top:var(--sp-2);
+}
+.footer-meta>*{font-size:var(--fs-legal);line-height:24px;color:var(--ink-muted)}
+.footer-meta a{
+  display:inline-block;
+  padding:12px 0;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+/* ============ Bewegung auf Wunsch abschalten ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container top">
+  <a class="link-secondary" href="index.html" data-back>← Zurück</a>
+</div>
+
+<main class="container page flow">
+  <h1>Datenschutzerklärung</h1>
+
+  <p>Hier steht, welche Daten diese Website verarbeitet, warum das passiert und was du dagegen tun kannst. Kurz vorweg: Diese Seite setzt keine Cookies. Deshalb gibt es auch kein Cookie-Banner.</p>
+
+  <h2>Verantwortlicher</h2>
+
+  <address>
+    Levi Breitenthaler<br>
+    Doktor Robert Graf Straße 30<br>
+    8010 Graz<br>
+    Österreich
+  </address>
+
+  <!-- PLATZHALTER [[E-MAIL]] — echte Adresse eintragen -->
+  <p>E-Mail: [[E-MAIL]]<br>
+     Telefon: +43 670 6068802</p>
+
+  <h2>Hosting und Server-Logfiles</h2>
+
+  <!-- PLATZHALTER [[HOSTER]] — Name und Anschrift des Hosters eintragen -->
+  <p>Diese Website wird bei [[HOSTER]] gehostet. Wenn du die Seite aufrufst, erhebt der Hoster automatisch Informationen, die dein Browser übermittelt, und speichert sie in sogenannten Server-Logfiles:</p>
+
+  <ul class="bullets">
+    <li>Browsertyp und Browserversion</li>
+    <li>verwendetes Betriebssystem</li>
+    <li>Referrer-URL, also die zuvor besuchte Seite</li>
+    <li>Hostname des zugreifenden Rechners</li>
+    <li>Uhrzeit der Serveranfrage</li>
+    <li>IP-Adresse</li>
+  </ul>
+
+  <p>Diese Daten werden nicht mit anderen Datenquellen zusammengeführt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO: Der Betreiber hat ein berechtigtes Interesse daran, dass die Website technisch fehlerfrei ausgeliefert wird und dass Angriffe erkannt werden können.</p>
+
+  <h2>Reichweitenmessung</h2>
+
+  <p>Für die Reichweitenmessung wird Plausible Analytics eingesetzt. Plausible arbeitet ohne Cookies und ohne andere Verfahren, die dein Gerät wiedererkennen. Es werden keine personenbezogenen Daten verarbeitet, es findet keine geräteübergreifende Wiedererkennung statt, und deine IP-Adresse wird nicht gespeichert.</p>
+
+  <p>Gemessen werden ausschließlich zusammengefasste Werte: wie viele Seitenaufrufe es gab, aus welchem Land die Zugriffe kamen, welcher Gerätetyp verwendet wurde, welche Seite verwiesen hat und welche Elemente auf der Seite angeklickt wurden. Ein Rückschluss auf dich als Person ist damit nicht möglich.</p>
+
+  <p>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO: Der Betreiber hat ein berechtigtes Interesse daran, zu verstehen, wie die Website genutzt wird, um sie zu verbessern. Die Daten werden auf Servern innerhalb der EU verarbeitet und gespeichert.</p>
+
+  <h2>Keine Cookies</h2>
+
+  <p>Diese Website setzt keine Cookies — weder eigene noch die von Dritten. Es wird auch kein Local Storage und kein vergleichbares Verfahren zur Wiedererkennung verwendet. Deshalb wirst du hier nicht um eine Einwilligung gebeten und findest kein Cookie-Banner.</p>
+
+  <h2>Externe Links und Affiliate-Programme</h2>
+
+  <p>Diese Website verlinkt auf externe Angebote, unter anderem auf die Plattform Robethood (APS Swiss GmbH, Zürcherstrasse 16b, CH-8852 Altendorf), auf Trustpilot und auf WhatsApp. Für die Inhalte dieser Seiten ist jeweils der dortige Anbieter verantwortlich.</p>
+
+  <p>Ein Teil dieser Links sind Affiliate-Links. Wenn du darauf klickst, wird ein Weiterleitungsdienst aufgerufen, der deinen Klick der Vermittlung zuordnet. Dabei werden technische Daten wie IP-Adresse, Zeitpunkt und Referrer verarbeitet und eine Kennung gesetzt. Kommt darüber eine Anmeldung zustande, erhält der Betreiber eine Provision. Für dich entstehen dadurch keine Kosten. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, berechtigtes Interesse an der Abrechnung vermittelter Anmeldungen.</p>
+
+  <p>Sobald du einem dieser Links folgst, gilt die Datenschutzerklärung des jeweiligen Anbieters. Für Robethood findest du sie hier: <a class="link-secondary" href="https://gksnwp.robethood.net/ts/93765/tsc?amc=con.robethood.544369.566256.15720404&amp;smc1=datenschutzerkl%C3%A4rung-direct&amp;rmd=3&amp;trg=https%3A%2F%2Frobethood.net%2Fdatenschutzerklaerung" target="_blank" rel="noopener">Datenschutzerklärung von Robethood</a></p>
+
+  <h2>WhatsApp</h2>
+
+  <p>Wenn du auf den Gruppenlink klickst, wird WhatsApp geöffnet — als App oder im Browser. Ab diesem Moment gilt die Datenschutzerklärung von WhatsApp Ireland Ltd., Merrion Road, Dublin 4, D04 X2K5, Irland. Der Betreiber dieser Website hat keinen Einfluss darauf, welche Daten WhatsApp dabei verarbeitet.</p>
+
+  <p>Wenn du der Gruppe beitrittst, ist deine Telefonnummer für die übrigen Gruppenmitglieder sichtbar — so wie in jeder WhatsApp-Gruppe. Auch dein Profilname und dein Profilbild sind sichtbar, sofern du sie eingestellt hast. Rechtsgrundlage für die Verarbeitung durch den Betreiber innerhalb der Gruppe ist deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO.</p>
+
+  <p>Der Beitritt ist freiwillig und jederzeit widerrufbar: Du kannst die Gruppe mit einem Klick wieder verlassen. Wenn du das nicht möchtest, schreib stattdessen direkt an die Nummer im Impressum.</p>
+
+  <h2>Speicherdauer</h2>
+
+  <p>Server-Logfiles werden nach spätestens 30 Tagen gelöscht oder anonymisiert, soweit sie nicht ausnahmsweise zur Aufklärung eines konkreten Missbrauchsfalls länger benötigt werden. Die zusammengefassten Werte der Reichweitenmessung enthalten keinen Personenbezug und werden dauerhaft ausgewertet. Nachrichten, die du direkt schreibst, werden gelöscht, sobald sie nicht mehr benötigt werden und keine Aufbewahrungspflicht entgegensteht.</p>
+
+  <h2>Deine Rechte</h2>
+
+  <p>Du hast jederzeit das Recht:</p>
+
+  <ul class="bullets">
+    <li>Auskunft darüber zu verlangen, welche Daten über dich verarbeitet werden (Art. 15 DSGVO)</li>
+    <li>falsche Daten berichtigen zu lassen (Art. 16 DSGVO)</li>
+    <li>die Löschung deiner Daten zu verlangen (Art. 17 DSGVO)</li>
+    <li>die Verarbeitung einschränken zu lassen (Art. 18 DSGVO)</li>
+    <li>deine Daten in einem übertragbaren Format zu erhalten (Art. 20 DSGVO)</li>
+    <li>der Verarbeitung zu widersprechen, soweit sie auf einem berechtigten Interesse beruht (Art. 21 DSGVO)</li>
+    <li>eine erteilte Einwilligung mit Wirkung für die Zukunft zu widerrufen (Art. 7 Abs. 3 DSGVO)</li>
+  </ul>
+
+  <p>Dafür genügt eine formlose Nachricht an die Adresse oben. Außerdem hast du das Recht, dich bei einer Aufsichtsbehörde zu beschweren (Art. 77 DSGVO). Zuständig ist in Österreich die Österreichische Datenschutzbehörde, in Deutschland die Aufsichtsbehörde deines Bundeslandes.</p>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p class="legal">Nur für Personen ab 18 Jahren. Glücksspiel kann süchtig machen. Hilfe und Beratung: BZgA, www.check-dein-spiel.de, kostenlose Hotline 0800 1 37 27 00.</p>
+
+    <p class="footer-meta">
+      <span>Werbung / Anzeige</span>
+      <span aria-hidden="true">·</span>
+      <a href="index.html" data-top>Startseite</a>
+      <span aria-hidden="true">·</span>
+      <a href="impressum.html">Impressum</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+/* "← Zurück" führt dorthin, wo der Besucher vorher war — nicht an den
+   Seitenanfang. Die Position kommt im Fragment an (#zurueck=1234) und
+   wird ins Ziel-href weitergereicht. document.referrer taugt dafür
+   nicht: bei file://-Aufrufen und strengen Referrer-Policies ist er leer.
+   "Startseite" bleibt bewusst ein Sprung nach oben. */
+(() => {
+  const KEY = "rb:pos";
+
+  document.querySelectorAll("[data-top]").forEach((a) =>
+    a.addEventListener("click", () => {
+      try { sessionStorage.removeItem(KEY); } catch (e) {}
+    }));
+
+  const back = document.querySelector("[data-back]");
+  if (!back) return;
+
+  let pos = null;
+  const m = /^#zurueck=(\d+)$/.exec(location.hash);
+  if (m) {
+    pos = m[1];
+    history.replaceState(null, "", location.pathname + location.search);
+  } else {
+    try { pos = sessionStorage.getItem(KEY); } catch (e) {}
+  }
+  if (pos === null) return;        // Direkteinstieg: href bleibt unverändert
+
+  back.setAttribute("href", back.getAttribute("href").split("#")[0] + "#zurueck=" + pos);
+
+  /* Gibt es einen eigenen Verlaufseintrag, ist history.back() der bessere
+     Weg: der Browser stellt die Position selbst her und legt keinen
+     zusätzlichen Eintrag an. Sonst trägt das href die Position. */
+  if (history.length > 1) {
+    back.addEventListener("click", (e) => { e.preventDefault(); history.back(); });
+  }
+})();
+</script>
+
+<!-- [[DOMAIN]] — Platzhalter: echte Domain eintragen -->
+<script defer data-domain="[[DOMAIN]]"
+        src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+
+</body>
+</html>

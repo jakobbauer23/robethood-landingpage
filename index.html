@@ -1,0 +1,1760 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>500&nbsp;€ ohne eigenen Einsatz — so funktioniert es</title>
+<meta name="description" content="Wie du über eine Tippgemeinschaft einmalig rund 500&nbsp;€ bekommst, ohne eigenes Geld einzuzahlen. Ablauf, Zeitaufwand und Voraussetzungen offen erklärt.">
+<meta name="robots" content="index,follow">
+<script>
+/* Setzt die Reveal-Klasse VOR dem ersten Paint. Ohne JS, ohne
+   IntersectionObserver oder bei prefers-reduced-motion bleibt alles
+   dauerhaft sichtbar — die Seite funktioniert dann ganz ohne Bewegung. */
+if ("IntersectionObserver" in window &&
+    !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  document.documentElement.className += " js-anim";
+}
+</script>
+<style>
+/* ============================================================
+   Tokens
+   ============================================================ */
+:root{
+  color-scheme: light;
+
+  /* Flächen — drei "Papiere" */
+  --paper:      #FFFFFF;
+  --paper-warm: #F3EFE6;   /* warme Sandfläche */
+  --deep:       #1C1A17;   /* warmes Schwarz, Vollflächen-Sektionen */
+
+  /* Schrift auf hellem Grund */
+  --ink:        #16202B;   /* 16,5:1 auf Weiß — AAA */
+  --ink-muted:  #5A6672;   /* 5,9:1 auf Weiß · 5,1:1 auf Sand — AA */
+  --accent:     #6B5D4F;   /* Umbra, 6,4:1 auf Weiß · 5,5:1 auf Sand — AA */
+  --line:       #DDE3E9;
+  --line-warm:  #DED7C9;
+
+  /* Schrift auf dunklem Grund */
+  --on-deep:        #E8E4DC;  /* 13,7:1 */
+  --on-deep-muted:  #A8A093;  /* 6,7:1 */
+  --accent-deep:    #C9B99F;  /* 9,0:1 */
+  --line-deep:      rgba(232,228,220,.18);
+
+  /* Signalfarbe — ausschließlich primäre Buttons */
+  --cta:       #0B7A5A;
+  --cta-hover: #096349;
+  --focus:     #0B7A5A;
+
+  /* Schriftrollen */
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, sans-serif;
+  --font-display: Georgia, "Iowan Old Style", "Palatino Linotype",
+                  "Book Antiqua", "Times New Roman", serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+               "Cascadia Mono", Consolas, monospace;
+
+  /* Fluide Skala — ersetzt den harten Breakpoint-Sprung */
+  --fs-hero-num: clamp(64px, 15vw, 132px);
+  --fs-h1:       clamp(29px, 5.2vw, 46px);
+  --fs-h2:       clamp(26px, 4vw, 38px);
+  --fs-h3:       clamp(20px, 2.4vw, 23px);
+  --fs-body:     clamp(17px, 1.15vw, 18px);
+  --fs-small:    15px;
+  --fs-legal:    14px;
+
+  --sp-1: 8px;
+  --sp-2: 16px;
+  --sp-3: 24px;
+  --sp-4: 32px;
+  --sp-6: 48px;
+  --sp-8: 64px;
+  --sp-10: 80px;
+  --sp-12: 112px;
+
+  --sp-section: var(--sp-10);
+  --gutter: max(20px, env(safe-area-inset-left), env(safe-area-inset-right));
+  --frame: 1160px;
+  --measure: 34em;   /* Zeilenlänge 50–75 Zeichen */
+  --rail: 17em;      /* Überschriften-Spalte im Redaktionsraster */
+}
+@media (min-width:768px){
+  :root{ --gutter: max(40px, env(safe-area-inset-left), env(safe-area-inset-right)); }
+}
+@media (min-width:1024px){
+  :root{
+    --sp-section: var(--sp-12);
+    --gutter: max(56px, env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+}
+
+/* ============================================================
+   Grundgerüst
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box }
+html{ -webkit-text-size-adjust:100% }
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:var(--fs-body);
+  line-height:1.6;
+  padding-bottom:88px;   /* Platz für die Sticky-Leiste */
+}
+@media (min-width:768px){
+  body{ padding-bottom:0 }
+}
+h1,h2,h3,p,ul,ol,figure,blockquote{ margin:0 }
+ul,ol{ padding:0 }
+img{ max-width:100%; height:auto }
+a{ color:inherit }
+
+h1,h2{
+  font-family:var(--font-display);
+  font-weight:400;              /* Georgia trägt bei Display-Größe ohne Bold */
+  letter-spacing:-.015em;
+}
+h1{ font-size:var(--fs-h1); line-height:1.1 }
+h2{ font-size:var(--fs-h2); line-height:1.12 }
+h3{
+  font-size:var(--fs-h3);
+  line-height:1.3;
+  font-weight:600;
+  letter-spacing:-.005em;
+}
+p{ line-height:1.6 }
+strong{ font-weight:650 }
+
+:where(a,summary,button):focus-visible{
+  outline:3px solid var(--focus);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+/* ============================================================
+   Raster
+   ============================================================ */
+.frame{
+  width:100%;
+  max-width:var(--frame);
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+.measure{ max-width:var(--measure) }
+
+.section{ padding-block:var(--sp-section) }
+
+/* Redaktionsraster: Überschrift links, Fließtext rechts */
+@media (min-width:1024px){
+  .frame--split{
+    display:grid;
+    grid-template-columns:minmax(0,var(--rail)) minmax(0,var(--measure));
+    column-gap:var(--sp-8);
+    justify-content:center;
+    align-items:start;
+  }
+  /* Im schmalen Rail eine Stufe kleiner — sonst zerfällt eine lange
+     Überschrift in vier Zwei-Wort-Zeilen. */
+  .frame--split .sect-head h2{
+    font-size:clamp(25px, 2.5vw, 31px);
+    line-height:1.15;
+  }
+}
+
+/* Flächen-Modifier: Tokens im Geltungsbereich umdefinieren */
+.section--warm{
+  background:var(--paper-warm);
+  --line:var(--line-warm);
+}
+.section--deep{
+  background:var(--deep);
+  --ink:var(--on-deep);
+  --ink-muted:var(--on-deep-muted);
+  --accent:var(--accent-deep);
+  --line:var(--line-deep);
+  color:var(--ink);
+}
+
+/* Haarlinie als Sektionsgrenze — nur zwischen zwei hellen Flächen */
+.section--ruled{ border-top:1px solid var(--line) }
+
+/* Fluss innerhalb eines Textblocks */
+.flow>*+*{ margin-top:var(--sp-3) }
+.flow>h3{ margin-top:var(--sp-8) }
+.flow>h3+*{ margin-top:var(--sp-3) }
+
+/* Abstand Überschrift → Inhalt (nur solange einspaltig) */
+.sect-head+.sect-body{ margin-top:var(--sp-6) }
+@media (min-width:1024px){
+  .sect-head+.sect-body{ margin-top:0 }
+}
+
+/* ============================================================
+   Primärer Button
+   ============================================================ */
+.btn-primary{
+  display:block;
+  width:100%;
+  min-height:58px;
+  padding:17px 32px;
+  background:var(--cta);
+  color:#FFFFFF;
+  font-family:var(--font-body);
+  font-size:18px;
+  font-weight:600;
+  line-height:1.35;
+  letter-spacing:-.005em;
+  text-align:center;
+  text-decoration:none;
+  border:none;
+  border-radius:10px;
+  box-shadow:0 1px 2px rgba(11,122,90,.25);
+  cursor:pointer;
+  transition:background-color 120ms ease-out, transform 120ms ease-out;
+}
+.btn-primary:hover{ background:var(--cta-hover) }
+.btn-primary:active{ transform:scale(.985) }
+@media (min-width:768px){
+  /* Auf Desktop Inhaltsbreite statt Vollbreite — sonst Mobile-Muster */
+  .btn-primary{
+    width:auto;
+    min-width:320px;
+    max-width:100%;
+  }
+  .btn-wrap{ display:flex }
+}
+
+/* ============================================================
+   Sekundärer Link — darf nicht wie ein Button aussehen
+   ============================================================ */
+.link-secondary{
+  color:var(--ink);
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:4px;
+  padding:12px 0;
+  display:inline-block;
+  transition:text-decoration-color 120ms ease-out;
+}
+.link-secondary:hover{ text-decoration-color:var(--accent) }
+
+/* ============================================================
+   Kopfleiste — Kapitel links, primärer Button rechts
+   ============================================================ */
+.site-header{
+  background:var(--paper);
+  border-bottom:1px solid var(--line);
+}
+/* Mitlaufend nur ab Tablet: dort gibt es keine Leiste am unteren Rand.
+   Auf Mobile scrollt der Kopf weg und die Sticky-Leiste unten übernimmt —
+   zwei gleichzeitig sichtbare grüne Flächen wären zu viel Druck. */
+@media (min-width:768px){
+  .site-header{ position:sticky; top:0; z-index:60 }
+  section[id]{ scroll-margin-top:76px }
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--sp-2);
+  min-height:60px;
+}
+@media (min-width:768px){
+  .header-inner{ min-height:68px }
+}
+/* Bildmarke und Kapitel bilden die linke Gruppe, der Button bleibt
+   rechts. Bewusst kein Link auf der Marke: ein zweites klickbares Ziel
+   neben dem Button macht aus der Kopfleiste eine Entscheidung, die hier
+   niemand treffen muss. */
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  min-width:0;
+}
+@media (min-width:768px){
+  .header-left{ gap:var(--sp-4) }
+}
+.brand{ display:flex; flex:none }
+/* Höher als das reine Zeichen, weil die Streifen oben und unten
+   herausragen — das Zeichen selbst misst rund 79 % der Bildhöhe. */
+.brand img{
+  display:block;
+  height:36px;
+  width:auto;          /* Seitenverhältnis kommt aus width/height am img */
+}
+@media (min-width:768px){
+  .brand img{ height:40px }
+}
+
+.header-nav{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  min-width:0;
+}
+@media (min-width:768px){
+  .header-nav{ gap:var(--sp-4) }
+}
+.header-nav a{
+  display:inline-flex;
+  align-items:center;
+  min-height:44px;
+  font-size:14px;
+  line-height:1.2;
+  color:var(--ink-muted);
+  text-decoration:none;
+  white-space:nowrap;
+  transition:color 120ms ease-out;
+}
+@media (min-width:768px){
+  .header-nav a{ font-size:15px }
+}
+.header-nav a:hover{
+  color:var(--ink);
+  text-decoration:underline;
+  text-underline-offset:5px;
+}
+/* Zwei der fünf Kapitel erst ab Tablet — auf 360 px reicht die Zeile
+   sonst nicht für Kapitel und Button. */
+.header-nav a.nav-wide{ display:none }
+@media (min-width:768px){
+  .header-nav a.nav-wide{ display:inline-flex }
+}
+/* Seit die Bildmarke links steht, reicht die Zeile unter 480 px nicht
+   mehr für drei Kapitel — dann bleiben die beiden, die der skeptische
+   Leser sucht. */
+/* .98 statt glatter Werte: bei Geräten mit gebrochener Viewport-Breite
+   (dpr 2, 479,5 px) greift max-width:479px sonst nicht. */
+@media (max-width:479.98px){
+  .header-nav a.nav-narrow-hide{ display:none }
+}
+@media (max-width:359.98px){
+  .header-left{ gap:12px }
+  .brand img{ height:32px }
+  .header-nav{ gap:16px }
+  .header-nav a{ font-size:13px }
+  .btn-compact{ padding:11px 14px; font-size:14px }
+}
+
+/* Kompakte Fassung des primären Buttons: gleiche Farbe, gleiche Form,
+   nur kleiner. Muss nach .btn-primary stehen, um dessen Desktop-
+   Mindestbreite zu überschreiben. */
+.btn-compact{
+  width:auto;
+  min-width:0;
+  min-height:44px;
+  padding:11px 16px;
+  font-size:15px;
+  border-radius:8px;
+  white-space:nowrap;
+  flex:none;
+}
+@media (min-width:768px){
+  .btn-compact{ min-width:0; padding:12px 22px; font-size:16px }
+}
+/* „WhatsApp-" fällt auf sehr schmalen Schirmen weg */
+.nav-cta-long{ display:none }
+@media (min-width:400px){
+  .nav-cta-long{ display:inline }
+}
+
+.cta-note{
+  font-family:var(--font-mono);
+  font-size:13px;
+  line-height:1.5;
+  letter-spacing:.03em;
+  color:var(--ink-muted);
+}
+.flow>.btn-wrap{ margin-top:var(--sp-6) }
+.flow>.cta-note{ margin-top:var(--sp-3) }
+
+/* ============================================================
+   Sektion 1 — Hero
+   ============================================================ */
+.hero{
+  padding-top:var(--sp-6);
+  padding-bottom:var(--sp-10);
+}
+@media (min-width:768px){
+  .hero{
+    padding-top:var(--sp-10);
+    padding-bottom:var(--sp-12);
+  }
+}
+.hero-num{
+  display:block;
+  font-family:var(--font-display);
+  font-size:var(--fs-hero-num);
+  font-weight:400;
+  line-height:.88;
+  letter-spacing:-.035em;
+  margin-bottom:var(--sp-3);
+}
+.hero-rest{
+  display:block;
+  font-family:var(--font-body);
+  font-size:clamp(21px, 2.9vw, 30px);
+  font-weight:400;
+  line-height:1.25;
+  letter-spacing:-.01em;
+  max-width:16em;
+  color:var(--ink);
+}
+.hero-sub{
+  margin-top:var(--sp-6);
+  max-width:var(--measure);
+  font-size:clamp(18px, 1.5vw, 20px);
+  line-height:1.55;
+}
+.hero .btn-wrap{ margin-top:var(--sp-6) }
+.hero-risk{
+  margin-top:var(--sp-3);
+  font-family:var(--font-mono);
+  font-size:13px;
+  line-height:1.5;
+  letter-spacing:.03em;
+  color:var(--ink-muted);
+}
+
+/* Hero als Raster über die ganze Breite. Einspaltig folgt es der
+   Quellreihenfolge: Headline, Subline, Trustpilot, Video, Button.
+   Ab 1024 px wandert allein das Video über grid-template-areas in die
+   rechte Spalte — dadurch steht es genau einmal im DOM statt zweimal
+   für zwei Bildschirmbreiten. */
+.hero-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+}
+.hero-video{ margin-top:var(--sp-6) }
+@media (min-width:1024px){
+  .hero-grid{
+    grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);
+    column-gap:var(--sp-10);
+    align-items:start;
+    grid-template-areas:
+      "kopf  video"
+      "sub   video"
+      "tp    video"
+      "cta   video"
+      "risk  video";
+  }
+  .hero-grid>h1         { grid-area:kopf }
+  .hero-grid>.hero-sub  { grid-area:sub }
+  .hero-grid>.tp        { grid-area:tp }
+  .hero-grid>.btn-wrap  { grid-area:cta }
+  .hero-grid>.hero-risk { grid-area:risk }
+  .hero-grid>.hero-video{ grid-area:video; align-self:center; margin-top:0 }
+}
+/* Ab 1200 px ist links genug Luft, um dem Video mehr Fläche zu geben.
+   Darunter bliebe für Headline und den 320 px breiten Button zu wenig. */
+@media (min-width:1200px){
+  .hero-grid{ grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr) }
+}
+
+/* ============================================================
+   Video — läuft ausschließlich auf Antippen
+   Kein autoplay, kein loop, kein stummes Hintergrundvideo. Bewegung,
+   die der Leser nicht ausgelöst hat, ist auf dieser Seite das
+   stärkste Werbesignal. preload="none" lädt die Datei erst beim
+   Start; bis dahin kostet das Video nur das Standbild.
+   ============================================================ */
+.video-figure{ margin:0 }
+.video-figure video{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;        /* hält den Platz frei, CLS bleibt 0 */
+  background:var(--deep);
+  border:1px solid rgba(28,26,23,.16);
+  border-radius:12px;
+}
+.video-fallback{ padding:var(--sp-3) }
+.flow>.video-figure{ margin-top:var(--sp-6) }
+.flow>.video-figure+*{ margin-top:var(--sp-6) }
+
+/* ============================================================
+   Trustpilot-Bewertung — native Auszeichnung, kein Fremd-Embed
+   ============================================================ */
+.tp{
+  display:flex;
+  align-items:center;
+  gap:var(--sp-2);
+  flex-wrap:wrap;
+  margin-top:var(--sp-6);
+  padding-block:var(--sp-3);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  max-width:var(--measure);
+  text-decoration:none;
+  color:inherit;
+}
+.tp-stars{ display:block; flex:none }
+.tp-text{
+  font-size:var(--fs-small);
+  line-height:1.45;
+  color:var(--ink-muted);
+}
+.tp-brand{
+  font-weight:650;
+  color:var(--ink);
+}
+.tp:hover .tp-brand{ text-decoration:underline; text-underline-offset:3px }
+
+/* ============================================================
+   Kennzahlen-Band unter dem Hero
+   ============================================================ */
+.figures{
+  background:var(--paper-warm);
+  --line:var(--line-warm);
+  padding-block:var(--sp-8);
+}
+.figures-grid{ display:grid; gap:var(--sp-6) }
+@media (min-width:600px){
+  .figures-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:var(--sp-10);
+  }
+  .figures-grid>*+*{
+    padding-left:var(--sp-10);
+    border-left:1px solid var(--line);
+  }
+}
+.figure-num{
+  display:block;
+  font-family:var(--font-display);
+  font-size:clamp(34px,4.6vw,54px);
+  line-height:1;
+  letter-spacing:-.025em;
+}
+.figure-label{
+  display:block;
+  margin-top:var(--sp-2);
+  font-family:var(--font-mono);
+  font-size:13px;
+  line-height:1.5;
+  letter-spacing:.02em;
+  color:var(--ink-muted);
+  max-width:24em;
+}
+
+/* ============================================================
+   Sektion 2 — hervorgehobener Kernsatz
+   ============================================================ */
+.emphasis{
+  font-family:var(--font-display);
+  font-size:clamp(21px, 2.3vw, 26px);
+  font-weight:400;
+  line-height:1.35;
+  letter-spacing:-.01em;
+  padding-left:var(--sp-3);
+  border-left:2px solid var(--accent);
+}
+.flow>.emphasis{ margin-top:var(--sp-6) }
+
+/* ============================================================
+   Sektion 3 — Ablauf als gesetzte Tabelle
+   ============================================================ */
+.steps{ list-style:none; border-top:1px solid var(--line) }
+.steps>li{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  column-gap:var(--sp-3);
+  align-items:start;
+  padding-block:var(--sp-6);
+  border-bottom:1px solid var(--line);
+}
+.step-num{
+  grid-column:1; grid-row:1 / span 2;
+  font-family:var(--font-display);
+  font-size:clamp(32px, 4vw, 44px);
+  line-height:.9;
+  color:var(--accent);
+  font-variant-numeric:tabular-nums;
+}
+.step-title{ grid-column:2; grid-row:1 }
+.step-time{
+  grid-column:2; grid-row:2;
+  margin-top:var(--sp-1);
+  font-family:var(--font-mono);
+  font-size:13px;
+  line-height:1.5;
+  letter-spacing:.02em;
+  color:var(--ink-muted);
+}
+.step-body{
+  grid-column:2; grid-row:3;
+  margin-top:var(--sp-3);
+  max-width:36em;
+}
+/* Ab Tablet wandert die Zeitangabe in eine eigene rechte Spalte */
+@media (min-width:768px){
+  .steps>li{
+    grid-template-columns:auto minmax(0,1fr) 11em;
+    column-gap:var(--sp-6);
+  }
+  .step-title{ grid-column:2; grid-row:1 }
+  .step-body{ grid-column:2; grid-row:2; margin-top:var(--sp-2) }
+  .step-time{
+    grid-column:3; grid-row:1 / span 2;
+    margin-top:6px;
+    text-align:right;
+  }
+}
+
+/* ============================================================
+   Sektion 5 — Beweis
+   ============================================================ */
+/* Die vier Kontoauszüge liegen gestaffelt übereinander wie hingelegte
+   Zettel. Die jeweils nächste Karte liegt WIRKLICH über der vorherigen
+   (negativer Außenabstand, keine Beschneidung) — deshalb bleibt links
+   ein Streifen der darunterliegenden Karte stehen und man sieht, dass
+   sie dahinter weitergeht, statt abgeschnitten zu sein.
+   Rein statisch — nichts bewegt sich, kein Schatten, nur die weiße
+   Fläche der Karte trennt sie von der Sandfläche darunter.
+   Betrag und Datum stehen zusätzlich als echter Text in der
+   Bildunterschrift: keine Aussage existiert nur im Bild.
+   Alle Höhen sind aus der Breite gerechnet — alle vier Bilder haben
+   dasselbe Seitenverhältnis (700 : 1215) — deshalb steht die Höhe des
+   Stapels vor dem ersten Paint fest und nichts springt. */
+.proofs{
+  --w:    min(100%, 360px);                 /* Gesamtbreite des Stapels */
+  --step: calc(var(--w) / 9);               /* Versatz je Karte */
+  --card: calc(var(--w) - 3 * var(--step));
+  --img:  calc(var(--card) - 22px);         /* abzüglich Rand + Innenabstand */
+  --hide: calc(.80 * var(--img));           /* verdeckter Anteil je Karte */
+  width:var(--w);
+  margin-inline:auto;
+}
+.proof-slot{ --i:0; position:relative }
+/* Spätere Geschwister malen über frühere — kein z-index nötig. */
+.proof-slot+.proof-slot{ margin-top:calc(-1 * var(--hide)) }
+.proof-slot:nth-child(2){ --i:1 }
+.proof-slot:nth-child(3){ --i:2 }
+.proof-slot:nth-child(4){ --i:3 }
+
+.proof{
+  width:var(--card);
+  margin:0 0 0 calc(var(--i) * var(--step));
+  padding:10px;
+  background:var(--paper);
+  border:1px solid rgba(28,26,23,.14);
+  border-radius:10px;
+}
+.proof img{
+  display:block;
+  width:100%;
+  height:auto;
+  border:1px solid rgba(28,26,23,.10);
+  border-radius:4px;
+}
+/* Bildunterschrift steht über dem Bild, damit sie im sichtbaren
+   Streifen jeder verdeckten Karte mitläuft. */
+.proof figcaption{ margin-bottom:10px }
+.proof-sum{
+  display:block;
+  font-size:15px;
+  font-weight:650;
+  line-height:1.3;
+  color:var(--ink);
+}
+.proof-when{
+  display:block;
+  margin-top:2px;
+  font-family:var(--font-mono);
+  font-size:13px;
+  line-height:1.5;
+  letter-spacing:.01em;
+  color:var(--ink-muted);
+}
+
+/* Ab Tablet zwei Stapel nebeneinander — einer je Konto. Ein Fächer aus
+   vier Karten würde auf breiten Schirmen unnötig hoch. */
+@media (min-width:768px){
+  .proofs{
+    --w:340px;
+    --card:calc(var(--w) - var(--step));
+    display:grid;
+    grid-auto-flow:column;
+    grid-template-rows:auto auto;
+    grid-template-columns:repeat(2,var(--w));
+    column-gap:var(--sp-8);
+    justify-content:center;
+    align-items:start;
+    width:auto;
+  }
+  /* Im Raster überlappt nur die untere Karte jeder Spalte. */
+  .proof-slot:nth-child(3){ --i:0; margin-top:0 }
+  .proof-slot:nth-child(4){ --i:1 }
+  .proof-when{ letter-spacing:.02em }
+}
+
+.testimonials{
+  display:grid;
+  gap:var(--sp-6);
+  margin-top:var(--sp-4);
+}
+@media (min-width:768px){
+  .testimonials{ grid-template-columns:repeat(3,minmax(0,1fr)) }
+}
+.testimonial{
+  border-top:1px solid var(--line);
+  padding-top:var(--sp-3);
+}
+.testimonial p{
+  font-family:var(--font-display);
+  font-size:clamp(19px,1.8vw,21px);
+  line-height:1.45;
+}
+.testimonial footer{
+  display:flex;
+  align-items:center;
+  gap:var(--sp-2);
+  margin-top:var(--sp-3);
+  font-family:var(--font-mono);
+  font-size:13px;
+  line-height:1.45;
+  letter-spacing:.02em;
+  color:var(--ink-muted);
+}
+.testimonial cite{ font-style:normal }
+/* Feste Pixelmaße + border-radius statt maskiertem PNG: kein Alphakanal
+   nötig, damit der JPEG-Fallback auf jedem Untergrund sitzt. */
+.testimonial .avatar{
+  flex:none;
+  display:block;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--line);
+}
+.t-name{ display:block; color:var(--ink); font-weight:600 }
+.t-city{ display:block }
+.testimonials-src{
+  margin-top:var(--sp-6);
+  font-family:var(--font-mono);
+  font-size:13px;
+  letter-spacing:.02em;
+  color:var(--ink-muted);
+}
+
+/* ---- Belegliste "Was du selbst nachprüfen kannst" ---- */
+.checks-lead{
+  margin-top:var(--sp-3);
+  max-width:var(--measure);
+  color:var(--ink-muted);
+}
+
+/* Zahlenstreifen. Haarlinien statt Fläche, kleinere Ziffern als im
+   Kennzahlen-Band unter dem Hero — zwei Zahlenblöcke, zwei Gestalten. */
+.ratings{
+  display:grid;
+  gap:var(--sp-4);
+  margin-top:var(--sp-6);
+  padding-block:var(--sp-4);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+@media (min-width:600px){
+  .ratings{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--sp-6) }
+  .ratings>*+*{ padding-left:var(--sp-6); border-left:1px solid var(--line) }
+}
+.rating-num{
+  display:block;
+  font-family:var(--font-display);
+  font-size:clamp(26px,3vw,34px);
+  line-height:1;
+  letter-spacing:-.02em;
+}
+.rating-label{
+  display:block;
+  margin-top:var(--sp-1);
+  font-family:var(--font-mono);
+  font-size:13px;
+  line-height:1.5;
+  letter-spacing:.02em;
+  color:var(--ink-muted);
+  max-width:22em;
+}
+
+.checks{ list-style:none; margin-top:var(--sp-6) }
+/* Raster statt Flex: die Marken-Spalte ist bei jeder Zeile exakt gleich
+   breit, damit alle Überschriften auf derselben Kante beginnen. */
+.check{
+  display:grid;
+  grid-template-columns:26px minmax(0,1fr);
+  column-gap:var(--sp-3);
+  align-items:start;
+  padding-block:var(--sp-4);
+  border-bottom:1px solid var(--line);
+}
+.check-mark{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  margin-top:1px;
+  color:var(--accent);
+}
+.check-mark svg{ display:block; flex:none }
+.check-text{ min-width:0; max-width:44em }
+.check-title{ font-weight:650; line-height:1.35 }
+.check-body{
+  margin-top:2px;
+  font-size:var(--fs-small);
+  line-height:1.55;
+  color:var(--ink-muted);
+}
+.check-more{ margin-top:2px; font-size:var(--fs-small) }
+/* Ab Tablet rückt die Belegliste in zwei Spalten — die Zeilen sind
+   kurz genug, dass sie sonst als lange dünne Kette wirken. */
+@media (min-width:768px){
+  .checks{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    column-gap:var(--sp-8);
+  }
+}
+
+.proof-link{
+  display:inline-block;
+  padding:8px 0;
+  color:inherit;
+  text-decoration:underline;
+  text-decoration-thickness:1px;
+  text-underline-offset:4px;
+}
+
+/* ============================================================
+   Sektion 6 — FAQ
+   ============================================================ */
+.faq-list{ margin-top:var(--sp-2) }
+.faq{ border-bottom:1px solid var(--line) }
+.faq:first-of-type{ border-top:1px solid var(--line) }
+/* Die Fragen bewusst in der Grotesk, nicht in der Display-Serife:
+   es sind Bedienelemente, keine Überschriften. */
+.faq summary{
+  min-height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:var(--sp-3);
+  padding:18px 2px;
+  font-family:var(--font-body);
+  font-size:clamp(17px,1.6vw,19px);
+  font-weight:600;
+  line-height:1.35;
+  letter-spacing:-.005em;
+  cursor:pointer;
+  list-style:none;
+}
+.faq summary::-webkit-details-marker{ display:none }
+.faq summary::after{
+  content:"";
+  flex:none;
+  width:9px; height:9px;
+  margin-right:6px;
+  border-right:1.5px solid var(--accent);
+  border-bottom:1.5px solid var(--accent);
+  transform:translateY(-3px) rotate(45deg);
+  transition:transform 200ms ease-out;
+}
+.faq[open] summary::after{ transform:translateY(3px) rotate(-135deg) }
+.faq-body{
+  overflow:hidden;
+  transition:height 220ms ease-out;
+}
+/* Die Antwort steht auf einer leicht abgesetzten Sandfläche: zusammen
+   mit der halbfetten Frage darüber ist auf einen Blick klar, wo die
+   Frage aufhört und die Antwort anfängt.
+   Innenabstand und Schlussluft sitzen an den Kindern, nicht am
+   animierten Container — an ihm blieben sie im geschlossenen Zustand
+   als Lücke stehen und die Höhenanimation liefe ins Leere. */
+.faq-body>p{
+  margin:0;
+  max-width:var(--measure);
+  padding:var(--sp-3);
+  background:var(--paper-warm);
+}
+.faq-body>p+p{ margin-top:0; padding-top:0 }
+.faq-body>p:first-child{ border-radius:8px 8px 0 0 }
+.faq-body>p:last-child{ border-radius:0 0 8px 8px }
+.faq-body>p:only-child{ border-radius:8px }
+.faq-body::after{ content:""; display:block; height:var(--sp-4) }
+
+/* ============================================================
+   Sektion 7 — Gegenüberstellung
+   ============================================================ */
+.pair{ margin-top:var(--sp-8) }
+.pair-block+.pair-block{ margin-top:var(--sp-8) }
+@media (min-width:768px){
+  .pair{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:var(--sp-8);
+    align-items:start;
+  }
+  .pair-block+.pair-block{ margin-top:0 }
+}
+.pair-block h3{
+  padding-bottom:var(--sp-2);
+  border-bottom:1px solid var(--line);
+}
+.marklist{ list-style:none }
+.pair-block .marklist{ margin-top:var(--sp-3) }
+.marklist li{
+  display:grid;
+  grid-template-columns:1.5em 1fr;
+  align-items:start;
+}
+.marklist li+li{ margin-top:var(--sp-3) }
+.mark{ color:var(--accent); font-family:var(--font-mono) }
+.honest{
+  margin-top:var(--sp-8);
+  max-width:var(--measure);
+  color:var(--ink-muted);
+  font-size:var(--fs-small);
+  line-height:1.6;
+}
+
+/* ============================================================
+   Sektion 8 — Qualifikation
+   ============================================================ */
+.qual-list{ list-style:none; margin-top:var(--sp-2) }
+.qual-list li{
+  display:grid;
+  grid-template-columns:1.5em 1fr;
+  align-items:start;
+  padding-block:var(--sp-3);
+  border-bottom:1px solid var(--line);
+}
+.qual-list li:first-child{ border-top:1px solid var(--line) }
+.qual{ margin-top:var(--sp-4); max-width:var(--measure) }
+
+/* ============================================================
+   Sektion 9 — Abschluss (dunkel)
+   ============================================================ */
+.close-head{
+  font-size:clamp(30px,4.4vw,44px);
+  line-height:1.1;
+  max-width:14em;
+}
+.close-note{ margin-top:var(--sp-6); max-width:var(--measure) }
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer{
+  border-top:1px solid var(--line);
+  padding-block:var(--sp-8);
+}
+.legal{
+  font-size:var(--fs-legal);
+  line-height:1.6;
+  color:var(--ink-muted);
+  max-width:44em;
+}
+.legal+.legal{ margin-top:var(--sp-3) }
+.footer-meta{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:var(--sp-1) var(--sp-3);
+  margin-top:var(--sp-3);
+  padding-top:var(--sp-3);
+  border-top:1px solid var(--line);
+}
+.footer-meta>*{
+  font-family:var(--font-mono);
+  font-size:12px;
+  letter-spacing:.04em;
+  line-height:24px;
+  color:var(--ink-muted);
+}
+.footer-meta a,.footer-meta .tag{ display:inline-block; padding:12px 0 }
+.footer-meta a{ text-decoration:underline; text-underline-offset:4px }
+
+/* ============================================================
+   Sticky-CTA-Leiste (nur Mobile)
+   ============================================================ */
+.sticky-cta{
+  position:fixed;
+  bottom:0; left:0; right:0;
+  padding:12px 16px;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom));
+  background:var(--paper);
+  border-top:1px solid var(--line);
+  transform:translateY(100%);
+  visibility:hidden;
+  transition:transform 200ms ease-out, visibility 0s linear 200ms;
+  z-index:50;
+}
+.sticky-cta.is-visible{
+  transform:translateY(0);
+  visibility:visible;
+  transition:transform 200ms ease-out, visibility 0s;
+}
+@media (min-width:768px){ .sticky-cta{ display:none } }
+
+/* ============================================================
+   Dezente Einblendung beim Scrollen
+   Nur aktiv, wenn .js-anim gesetzt ist (JS an, Motion erlaubt).
+   Nur opacity + transform — kein Layout-Reflow, kein CLS.
+   ============================================================ */
+.js-anim .reveal{
+  opacity:0;
+  transform:translateY(10px);
+  transition:opacity 320ms ease-out, transform 320ms ease-out;
+}
+.js-anim .reveal.is-in{
+  opacity:1;
+  transform:none;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal{ opacity:1 !important; transform:none !important }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== Kopfleiste ========== -->
+<header class="site-header">
+  <div class="frame header-inner">
+    <div class="header-left">
+      <!-- Bildmarke in Umbra #5B4F43, die Deko-Streifen des Originals
+           liegen in Sandton dahinter. Kein alt-Text: die Aussage „500 €"
+           steht direkt darunter als Headline im DOM, eine Wiederholung
+           wäre für Screenreader nur Lärm. -->
+      <span class="brand">
+        <img src="assets/logo.png" width="168" height="135" alt="" decoding="async">
+      </span>
+
+      <nav class="header-nav" aria-label="Abschnitte dieser Seite">
+        <a class="nav-wide" href="#woher">Woher das Geld</a>
+        <a class="nav-narrow-hide" href="#ablauf">Ablauf</a>
+        <a href="#beweis">Beweise</a>
+        <a href="#faq">Fragen</a>
+        <a class="nav-wide" href="#qualifikation">Voraussetzungen</a>
+      </nav>
+    </div>
+    <a class="btn-primary btn-compact"
+       href="https://chat.whatsapp.com/Jx9WIZSXB5LIKNh1y9m5Rf"
+       target="_blank" rel="noopener" data-cta="header">Zur <span class="nav-cta-long">WhatsApp-</span>Gruppe</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ========== Sektion 1 — Hero ========== -->
+  <section class="hero">
+    <div class="frame hero-grid">
+      <h1><span class="hero-num">500&nbsp;€</span> <span class="hero-rest">— und du zahlst keinen Cent ein.</span></h1>
+
+        <p class="hero-sub">Kein Einsatz. Kein Risiko. Keine Vorkenntnisse. Du wirst Teil einer Tippgemeinschaft — die Einsätze kommen von einem Wettexperten, nicht von dir.</p>
+
+        <!-- Trustpilot-Bewertung. Bewusst KEIN Trustpilot-Embed: das
+             offizielle Widget lädt ein Fremdskript, setzt Cookies und
+             würde eine Consent-Abfrage nötig machen. Hier native
+             Auszeichnung mit Link auf das echte Profil. -->
+        <a class="tp" href="https://www.trustpilot.com/review/robethood.net" target="_blank" rel="noopener" data-secondary="trustpilot_hero">
+          <svg class="tp-stars" viewBox="0 0 106 20" width="106" height="20" aria-hidden="true" focusable="false">
+            <defs>
+              <path id="tp-star" d="M10 2 12 7.25 17.61 7.53 13.23 11.05 14.7 16.47 10 13.4 5.3 16.47 6.77 11.05 2.39 7.53 8 7.25Z"/>
+              <clipPath id="tp-clip"><rect width="101.76" height="20"/></clipPath>
+            </defs>
+            <g fill="#DCDCE6">
+              <rect width="20" height="20"/><rect x="21.5" width="20" height="20"/><rect x="43" width="20" height="20"/><rect x="64.5" width="20" height="20"/><rect x="86" width="20" height="20"/>
+            </g>
+            <g fill="#FFFFFF">
+              <use href="#tp-star"/><use href="#tp-star" x="21.5"/><use href="#tp-star" x="43"/><use href="#tp-star" x="64.5"/><use href="#tp-star" x="86"/>
+            </g>
+            <g clip-path="url(#tp-clip)">
+              <g fill="#00B67A">
+                <rect width="20" height="20"/><rect x="21.5" width="20" height="20"/><rect x="43" width="20" height="20"/><rect x="64.5" width="20" height="20"/><rect x="86" width="20" height="20"/>
+              </g>
+              <g fill="#FFFFFF">
+                <use href="#tp-star"/><use href="#tp-star" x="21.5"/><use href="#tp-star" x="43"/><use href="#tp-star" x="64.5"/><use href="#tp-star" x="86"/>
+              </g>
+            </g>
+          </svg>
+          <span class="tp-text"><span class="tp-brand">Trustpilot</span> — 4,8 von 5 bei über 2.300 Bewertungen</span>
+        </a>
+
+        <!-- Einspaltig steht das Video hier, direkt über dem Button.
+             Ab 1024 px schiebt es grid-template-areas in die rechte
+             Spalte. Kein autoplay: es läuft erst, wenn getippt wird. -->
+        <figure class="video-figure hero-video">
+          <video controls preload="none" playsinline
+                 poster="assets/hero-poster.jpg"
+                 width="960" height="540">
+            <source src="assets/hero.mp4" type="video/mp4">
+            <p class="video-fallback">Dein Browser kann dieses Video nicht abspielen.
+              <a class="link-secondary" href="assets/hero.mp4">Video herunterladen</a></p>
+          </video>
+        </figure>
+
+        <div class="btn-wrap">
+          <a class="btn-primary" href="https://chat.whatsapp.com/Jx9WIZSXB5LIKNh1y9m5Rf" target="_blank" rel="noopener" data-cta="hero">Zeig mir, wie das geht</a>
+        </div>
+
+        <p class="hero-risk">Kostenlos · Du zahlst nichts ein · Öffnet die WhatsApp-Gruppe</p>
+    </div>
+  </section>
+
+  <!-- ========== Kennzahlen-Band ========== -->
+  <section class="figures">
+    <div class="frame">
+      <div class="figures-grid reveal">
+        <p>
+          <span class="figure-num">über 20.000</span>
+          <span class="figure-label">Teilnehmer</span>
+        </p>
+        <p>
+          <span class="figure-num">1.767.260&nbsp;€</span>
+          <span class="figure-label">bereits an Mitspieler ausgezahlt</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Sektion 2 — Woher das Geld kommt ========== -->
+  <section class="section" id="woher">
+    <div class="frame frame--split">
+      <div class="sect-head reveal">
+        <h2>Kurz: Woher kommen die 500&nbsp;€?</h2>
+      </div>
+      <div class="sect-body flow reveal">
+        <p>Wettanbieter zahlen viel Geld für neue Kunden — ihr Werkzeug dafür ist der Neukundenbonus. In einer Tippgemeinschaft wird auf alle Ausgänge eines Spiels gleichzeitig gesetzt: Egal, wer gewinnt, der Bonus bleibt im System. Aus Glücksspiel wird Rechnen. Dein Anteil an dem, was dabei übrig bleibt: rund 500&nbsp;€.</p>
+
+        <p>Den ganzen Ablauf erklären wir hier von vorne bis hinten:</p>
+
+        <figure class="video-figure">
+          <video controls preload="none" playsinline
+                 poster="assets/erklaervideo-poster.jpg"
+                 width="800" height="450">
+            <source src="assets/erklaervideo.mp4" type="video/mp4">
+            <p class="video-fallback">Dein Browser kann dieses Video nicht abspielen.
+              <a class="link-secondary" href="assets/erklaervideo.mp4">Video herunterladen</a></p>
+          </video>
+        </figure>
+
+        <p class="emphasis">Das Kapital dafür stellt ein Wettexperte. Nicht du. Deshalb kannst du auch nichts verlieren.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Sektion 3 — Der Ablauf ========== -->
+  <section class="section section--deep" id="ablauf">
+    <div class="frame">
+      <div class="reveal">
+        <h2>Was du dafür tust</h2>
+      </div>
+
+      <ol class="steps reveal" role="list" style="margin-top:var(--sp-6)">
+        <li>
+          <span class="step-num">1</span>
+          <h3 class="step-title">Anmelden</h3>
+          <p class="step-time">2 Minuten</p>
+          <p class="step-body">Du registrierst dich kostenlos in der Mitspieler-App oder im Web. Keine Zahlungsdaten, keine Kaution.</p>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <h3 class="step-title">Vorgaben erledigen</h3>
+          <p class="step-time">rund 55 Minuten insgesamt</p>
+          <p class="step-body">Die App führt dich Schritt für Schritt durch alles. Du entscheidest mit, wie getippt wird. Vorkenntnisse brauchst du keine.</p>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <h3 class="step-title">Geld bekommen</h3>
+          <p class="step-time">erste 50&nbsp;€ innerhalb der ersten Woche</p>
+          <p class="step-body">Der komplette Betrag ist nach rund 30 Tagen bei dir. Nicht sofort — der Gewinn muss erst erspielt werden.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ========== Sektion 4 — Die Anleitung ========== -->
+  <section class="section" id="anleitung">
+    <div class="frame frame--split">
+      <div class="sect-head reveal">
+        <h2>Wir haben jeden einzelnen Schritt aufgeschrieben</h2>
+      </div>
+      <div class="sect-body flow reveal">
+        <p>Bevor du irgendetwas machst: Lies dir in Ruhe durch, wie der komplette Ablauf aussieht. Jeder Schritt, jedes Formular, jede Wartezeit — offen dokumentiert.</p>
+
+        <p>Wenn danach noch Fragen offen sind, bist du in der Gruppe richtig.</p>
+
+        <!-- PLATZHALTER [[ANLEITUNG-LINK]] — echtes Ziel eintragen und data-todo entfernen -->
+        <p><a class="link-secondary" href="#" data-todo="anleitung" target="_blank" rel="noopener" data-secondary="anleitung">→ Zur Schritt-für-Schritt-Anleitung</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Sektion 5 — Beweis ========== -->
+  <!-- Bewusst hell: zwei der vier Screenshots sind Dark-Mode-Aufnahmen
+       und verschwinden auf dunklem Grund. Auf Sand stehen alle vier als
+       Objekt — und die weißen Karten setzen sich davon ab. -->
+  <section class="section section--warm" id="beweis">
+    <div class="frame">
+      <div class="reveal">
+        <h2>Prüf es nach, statt es uns zu glauben</h2>
+      </div>
+
+      <!-- Reihenfolge chronologisch. Ab 768 px steht das linke Konto in
+           der ersten, das rechte in der zweiten Spalte — deshalb muss die
+           DOM-Reihenfolge Konto für Konto laufen, nicht abwechselnd. -->
+      <div class="proofs reveal" style="margin-top:var(--sp-8)">
+        <div class="proof-slot">
+          <figure class="proof">
+            <figcaption>
+              <span class="proof-sum">50&nbsp;€</span>
+              <span class="proof-when">Teilzahlung · März 2026</span>
+            </figcaption>
+            <picture>
+              <source srcset="assets/auszahlung-50.webp" type="image/webp">
+              <!-- width/height Pflicht: kein Layoutsprung -->
+              <img src="assets/auszahlung-50.jpg"
+                   width="700" height="1219"
+                   loading="lazy" decoding="async"
+                   alt="Banking-App: SEPA-Gutschrift über 50,00 Euro, Buchung 23.03.2026, Kontodaten unkenntlich gemacht">
+            </picture>
+          </figure>
+        </div>
+
+        <div class="proof-slot">
+          <figure class="proof">
+            <figcaption>
+              <span class="proof-sum">450&nbsp;€</span>
+              <span class="proof-when">Restbetrag · Mai 2026</span>
+            </figcaption>
+            <picture>
+              <source srcset="assets/auszahlung-450.webp" type="image/webp">
+              <img src="assets/auszahlung-450.jpg"
+                   width="700" height="1210"
+                   loading="lazy" decoding="async"
+                   alt="Banking-App: SEPA-Gutschrift über 450,00 Euro, Buchung 04.05.2026, Kontodaten unkenntlich gemacht">
+            </picture>
+          </figure>
+        </div>
+
+        <div class="proof-slot">
+          <figure class="proof">
+            <figcaption>
+              <span class="proof-sum">50&nbsp;€</span>
+              <span class="proof-when">Teilzahlung · Juni 2026</span>
+            </figcaption>
+            <picture>
+              <source srcset="assets/auszahlung-50-juni.webp" type="image/webp">
+              <img src="assets/auszahlung-50-juni.jpg"
+                   width="700" height="1215"
+                   loading="lazy" decoding="async"
+                   alt="Banking-App: Gutschrift über 50,00 Euro, Durchführungsdatum 23.06.2026, Kontodaten unkenntlich gemacht">
+            </picture>
+          </figure>
+        </div>
+
+        <div class="proof-slot">
+          <figure class="proof">
+            <figcaption>
+              <span class="proof-sum">450&nbsp;€</span>
+              <span class="proof-when">Restbetrag · August 2026</span>
+            </figcaption>
+            <picture>
+              <source srcset="assets/auszahlung-450-august.webp" type="image/webp">
+              <img src="assets/auszahlung-450-august.jpg"
+                   width="700" height="1215"
+                   loading="lazy" decoding="async"
+                   alt="Banking-App: Gutschrift über 450,00 Euro, Durchführungsdatum 04.08.2026, Kontodaten unkenntlich gemacht">
+            </picture>
+          </figure>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-top:var(--sp-12)">
+        <h3>Was andere sagen</h3>
+
+        <!-- Wortlaut unverändert aus den Trustpilot-Bewertungen übernommen.
+             Die Profilbilder sind aus denselben Bewertungen freigestellt;
+             alt="" weil der Name daneben im DOM steht — sonst doppelt
+             vorgelesen. -->
+        <div class="testimonials">
+          <blockquote class="testimonial">
+            <p>„Hat alles wie versprochen geklappt. Danke euch. Einfach genial euer Konzept.“</p>
+            <footer>
+              <picture>
+                <source srcset="assets/review-michael.webp" type="image/webp">
+                <img class="avatar" src="assets/review-michael.jpg" width="96" height="96" loading="lazy" decoding="async" alt="">
+              </picture>
+              <cite><span class="t-name">Michael</span><span class="t-city">Graz</span></cite>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial">
+            <p>„Etwas gedauert, bis alles erledigt war bei der Anmeldung. Letztendlich ist alles prima gelaufen.“</p>
+            <footer>
+              <picture>
+                <source srcset="assets/review-uwe.webp" type="image/webp">
+                <img class="avatar" src="assets/review-uwe.jpg" width="96" height="96" loading="lazy" decoding="async" alt="">
+              </picture>
+              <cite><span class="t-name">Uwe</span><span class="t-city">Stuttgart</span></cite>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial">
+            <p>„Bin sehr zu Frieden mit robethood auch gut aufgehoben! Sehr nette Menschen“</p>
+            <footer>
+              <picture>
+                <source srcset="assets/review-marion.webp" type="image/webp">
+                <img class="avatar" src="assets/review-marion.jpg" width="96" height="96" loading="lazy" decoding="async" alt="">
+              </picture>
+              <cite><span class="t-name">Marion</span><span class="t-city">Hamburg</span></cite>
+            </footer>
+          </blockquote>
+        </div>
+
+        <p class="testimonials-src">Alle drei nachlesbar bei <a class="proof-link" href="https://www.trustpilot.com/review/robethood.net" target="_blank" rel="noopener" data-secondary="trustpilot_stimmen">Trustpilot</a></p>
+      </div>
+
+      <div class="reveal" style="margin-top:var(--sp-12)">
+        <h3>Und was du selbst nachprüfen kannst</h3>
+        <p class="checks-lead">Sechs Stellen, an denen du das hier gegenlesen kannst — ohne uns zu fragen.</p>
+
+        <!-- Zahlenstreifen: bewusst anders gesetzt als das Kennzahlen-Band
+             unter dem Hero (Haarlinien statt Fläche, kleinere Ziffern),
+             damit zwei Zahlenblöcke auf einer Seite nicht gleich aussehen. -->
+        <div class="ratings">
+          <p><span class="rating-num">4,8 von 5</span><span class="rating-label">Trustpilot, über 2.300 Bewertungen</span></p>
+          <p><span class="rating-num">4,7 von 5</span><span class="rating-label">App Store und Google Play</span></p>
+          <p><span class="rating-num">über 20.000</span><span class="rating-label">Downloads der Mitspieler-App</span></p>
+        </div>
+
+        <!-- Die Marken sind einzeln gezeichnet, einfarbig in --accent und
+             rein dekorativ (aria-hidden): jede Aussage steht daneben als
+             Text im DOM. Keine Icon-Bibliothek, kein Fremdasset. -->
+        <ul class="checks" role="list">
+          <li class="check">
+            <span class="check-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" focusable="false"><path fill="currentColor" d="M12 2.4 14.4 8.7 21.1 9.04 15.88 13.26 17.64 19.76 12 16.08 6.36 19.76 8.12 13.26 2.9 9.04 9.6 8.7Z"/></svg>
+            </span>
+            <div class="check-text">
+              <p class="check-title">Trustpilot</p>
+              <p class="check-body">Öffentliches Bewertungsprofil. Auch die schlechten Bewertungen stehen dort.</p>
+              <p class="check-more"><a class="proof-link" href="https://www.trustpilot.com/review/robethood.net" target="_blank" rel="noopener" data-secondary="trustpilot_liste">zu den Bewertungen</a></p>
+            </div>
+          </li>
+
+          <li class="check">
+            <!-- Eine Marke statt zwei: zwei Glyphen nebeneinander hätten die
+                 Spalte verbreitert und diese eine Zeile eingerückt. -->
+            <span class="check-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><rect x="6.6" y="2.6" width="10.8" height="18.8" rx="2.4"/><path d="M10.4 5.4h3.2"/><path d="M10.8 18.5h2.4"/></svg>
+            </span>
+            <div class="check-text">
+              <p class="check-title">App Store und Google Play</p>
+              <p class="check-body">Die Mitspieler-App ist in beiden Stores gelistet — mit Bewertungen, die du dort ungefiltert liest.</p>
+            </div>
+          </li>
+
+          <li class="check">
+            <span class="check-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 2.9 19.6 5.6v5.9c0 4.2-3.05 7.6-7.6 9-4.55-1.4-7.6-4.8-7.6-9V5.6L12 2.9Z"/><path d="m8.7 12.1 2.3 2.3 4.3-4.6"/></svg>
+            </span>
+            <div class="check-text">
+              <p class="check-title">Gemeinsame Glücksspielbehörde der Länder</p>
+              <p class="check-body">Es werden ausschließlich Wettanbieter von der offiziellen Whitelist der Behörde verwendet.</p>
+              <p class="check-more"><a class="proof-link" href="https://gksnwp.robethood.net/ts/93765/tsc?amc=con.robethood.544369.566256.15720404&amp;smc1=rechtskonformetippgemeinschaften-erkl%C3%A4rungdertippgemeinschaften&amp;rmd=3&amp;trg=https%3A%2F%2Fwww.robethood.net%2Flegal%2Frechtskonforme-tippgemeinschaften" target="_blank" rel="noopener" data-secondary="tippgemeinschaften">Erklärung der Tippgemeinschaften</a></p>
+            </div>
+          </li>
+
+          <li class="check">
+            <span class="check-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M6 3.2h7.6L18.4 8v12.8H6z"/><path d="M13.6 3.2V8h4.8"/><path d="M9 12.4h6.2M9 16h4.2"/></svg>
+            </span>
+            <div class="check-text">
+              <p class="check-title">Unabhängige Anwaltskanzleien</p>
+              <p class="check-body">Verträge und Abläufe werden regelmäßig geprüft. Die Berichte liegen offen.</p>
+              <p class="check-more"><a class="proof-link" href="https://gksnwp.robethood.net/ts/93765/tsc?amc=con.robethood.544369.566256.15720404&amp;smc1=zudenanwaltlichenpr%C3%BCfberichten&amp;rmd=3&amp;trg=https%3A%2F%2Fwww.robethood.net%2Fpresse%23rechtliche-hinweise" target="_blank" rel="noopener" data-secondary="pruefberichte">zu den anwaltlichen Prüfberichten</a></p>
+            </div>
+          </li>
+
+          <li class="check">
+            <span class="check-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M3.7 17.4a8.3 8.3 0 0 1 16.6 0"/><path d="M12 17.4 16.3 12.6"/></svg>
+            </span>
+            <div class="check-text">
+              <p class="check-title">SCHUFA</p>
+              <p class="check-body">Kein Einfluss auf deinen Score. Sagt nicht Robethood — sagt die SCHUFA selbst.</p>
+              <!-- Quelle ist die SCHUFA selbst, nicht eine Wiedergabe davon:
+                   der Absender der Aussage ist hier der ganze Punkt. -->
+              <p class="check-more"><a class="proof-link" href="https://www.schufa.de/newsroom/schufa/sportwetten-schufa-geburtsdatencheck/" target="_blank" rel="noopener" data-secondary="schufa">was die SCHUFA dazu schreibt</a></p>
+            </div>
+          </li>
+
+          <li class="check">
+            <span class="check-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M4.4 20.8h15.2"/><path d="M6.8 20.8V7.4l5.2-2.8 5.2 2.8v13.4"/><path d="M10.4 20.8v-4.1h3.2v4.1"/><path d="M9.7 9.1h1.5M12.8 9.1h1.5M9.7 12.6h1.5M12.8 12.6h1.5"/></svg>
+            </span>
+            <div class="check-text">
+              <p class="check-title">Handelsregister</p>
+              <p class="check-body">Echte Firma, echte Adresse: APS Swiss GmbH, Zürcherstrasse 16b, CH-8852 Altendorf.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Sektion 6 — FAQ ========== -->
+  <section class="section" id="faq">
+    <div class="frame frame--split">
+      <div class="sect-head reveal">
+        <h2>Was du dich wahrscheinlich gerade fragst</h2>
+      </div>
+
+      <div class="sect-body reveal">
+        <div class="faq-list">
+          <details class="faq" data-faq="legal">
+            <summary>Ist das legal?</summary>
+            <div class="faq-body">
+              <p>Ja. Tippgemeinschaften sind im deutschsprachigen Raum völlig normal — du kennst das Prinzip von der Lotto-Runde im Büro. Es wird ausschließlich bei Wettanbietern gespielt, die auf der offiziellen Whitelist der Glücksspielbehörde stehen.</p>
+            </div>
+          </details>
+
+          <details class="faq" data-faq="kosten">
+            <summary>Was kostet mich das?</summary>
+            <div class="faq-body">
+              <p>Nichts. Kein Einsatz, keine Kaution, kein Abo, keine versteckten Gebühren. Du kannst kein Geld verlieren, weil du keins einsetzt.</p>
+            </div>
+          </details>
+
+          <details class="faq" data-faq="vorkenntnisse">
+            <summary>Muss ich mich mit Sportwetten auskennen?</summary>
+            <div class="faq-body">
+              <p>Nein. Die App führt dich durch jeden Schritt. Der Wettexperte macht die Rechenarbeit.</p>
+            </div>
+          </details>
+
+          <details class="faq" data-faq="ausweis">
+            <summary>Warum wird für die Anmeldung mein Ausweis benötigt?</summary>
+            <div class="faq-body">
+              <p>Weil offiziell regulierte Anbieter genutzt werden und für die das europäische Geldwäschegesetz gilt (KYC). Die Plattformen sind gesetzlich verpflichtet, Alter und Identität zu prüfen, bevor Bonusgelder fließen. Das ist ein Standardvorgang im Finanzsektor.</p>
+            </div>
+          </details>
+
+          <details class="faq" data-faq="bankkonto">
+            <summary>Warum brauche ich ein zweites Bankkonto?</summary>
+            <div class="faq-body">
+              <p>Aus drei Gründen: Es trennt das Projekt von deinen privaten Ausgaben, es hält Zahlungen von Wettanbietern von deinem Gehaltskonto fern, und das System braucht ein isoliertes Konto für die automatischen Transfers. Ein kostenloses Konto reicht.</p>
+            </div>
+          </details>
+
+          <details class="faq" data-faq="steuern">
+            <summary>Muss ich das versteuern?</summary>
+            <div class="faq-body">
+              <p>Gewinne aus Glücksspiel sind in Deutschland für Privatpersonen grundsätzlich nicht einkommensteuerpflichtig. Das ist allgemeine Information und keine Steuerberatung — im Zweifel frag jemanden, der das darf.</p>
+            </div>
+          </details>
+
+          <details class="faq" data-faq="dauer">
+            <summary>Wie lange dauert es wirklich?</summary>
+            <div class="faq-body">
+              <p>Erste 50&nbsp;€ innerhalb der ersten Woche, der Rest nach rund 30 Tagen. Dein eigener Zeitaufwand liegt bei ungefähr einer Stunde insgesamt.</p>
+            </div>
+          </details>
+
+          <details class="faq" data-faq="mehrmals">
+            <summary>Kann ich das mehrmals machen?</summary>
+            <div class="faq-body">
+              <p>Nein. Neukundenboni gibt es pro Person nur einmal — deshalb funktioniert es genau einmal. 500&nbsp;€ einmalig.</p>
+            </div>
+          </details>
+
+          <details class="faq" data-faq="danach">
+            <summary>Was passiert danach mit meinen Konten bei den Wettanbietern?</summary>
+            <div class="faq-body">
+              <p>Die Konten gehören dir, und du entscheidest, was damit passiert. Am Ende ist bei jedem Anbieter das Guthaben ausgezahlt und nichts mehr offen. Danach kannst du jedes Konto schließen lassen — bei den lizenzierten Anbietern geht das in den Kontoeinstellungen oder mit einer kurzen Nachricht an den Support.</p>
+              <p>Nötig ist das nicht. Es läuft nichts weiter: kein Abo, keine Mindestumsätze, keine Abbuchungen. Ungenutzte Konten bleiben einfach liegen. Was bleibt, sind deine Ausweis- und Zahlungsdaten — die müssen die Anbieter auch nach einer Schließung noch eine Weile aufbewahren, so will es das Geldwäschegesetz.</p>
+            </div>
+          </details>
+
+          <details class="faq" data-faq="wettanbieter">
+            <summary>Warum machen die Wettanbieter da mit?</summary>
+            <div class="faq-body">
+              <p>Sie bekommen einen echten Neukunden. Genau dafür zahlen sie den Bonus. Dass jemand ihn diesmal nicht verzockt, ändert daran nichts.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Sektion 7 — Die WhatsApp-Gruppe ========== -->
+  <section class="section section--warm" id="gruppe">
+    <div class="frame">
+      <div class="reveal">
+        <h2 style="max-width:18em">Warum du erst in die Gruppe kommen kannst, statt direkt zur Anmeldung</h2>
+        <p style="margin-top:var(--sp-4);max-width:var(--measure)">Die meisten Leute haben nach dem Lesen noch zwei oder drei Fragen. Genau dafür ist die Gruppe da.</p>
+      </div>
+
+      <div class="pair reveal">
+        <div class="pair-block">
+          <h3>Was dich erwartet:</h3>
+          <ul class="marklist" role="list">
+            <li><span class="mark" aria-hidden="true">✓</span> <span>Die vollständige Anleitung an einem Ort</span></li>
+            <li><span class="mark" aria-hidden="true">✓</span> <span>Antworten auf deine Fragen — von uns persönlich, nicht von einem Bot</span></li>
+            <li><span class="mark" aria-hidden="true">✓</span> <span>Kurze Updates, wenn sich beim Ablauf etwas ändert</span></li>
+            <li><span class="mark" aria-hidden="true">✓</span> <span>Auszahlungen anderer Teilnehmer, damit du siehst, dass es läuft</span></li>
+          </ul>
+        </div>
+
+        <div class="pair-block">
+          <h3>Was dich nicht erwartet:</h3>
+          <ul class="marklist" role="list">
+            <li><span class="mark" aria-hidden="true">–</span> <span>Keine Werbeflut. Ein paar Nachrichten pro Woche, mehr nicht.</span></li>
+            <li><span class="mark" aria-hidden="true">–</span> <span>Kein Druck. Du entscheidest, ob und wann du startest.</span></li>
+            <li><span class="mark" aria-hidden="true">–</span> <span>Du kannst jederzeit mit einem Klick wieder raus.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <p class="honest">Ehrlich gesagt: Es ist eine normale WhatsApp-Gruppe. Die anderen Mitglieder sehen deine Nummer, so wie in jeder Gruppe. Wenn dir das zu weit geht, schreib uns stattdessen direkt — die Nummer steht unten im Impressum.</p>
+        <!-- ALTERNATIVE — nur einsetzen, wenn auf WhatsApp-Kanal oder
+             "nur Admins können schreiben" umgestellt wird:
+             – Niemand sieht deine Telefonnummer, auch die anderen
+               Mitglieder nicht.
+             Dann den Absatz "Ehrlich gesagt: …" ersatzlos entfernen. -->
+
+        <div class="btn-wrap" style="margin-top:var(--sp-8)">
+          <a class="btn-primary" href="https://chat.whatsapp.com/Jx9WIZSXB5LIKNh1y9m5Rf" target="_blank" rel="noopener" data-cta="whatsapp">Zur WhatsApp-Gruppe</a>
+        </div>
+
+        <p class="cta-note" style="margin-top:var(--sp-3)">Kostenlos · Jederzeit verlassbar</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Sektion 8 — Qualifikation ========== -->
+  <section class="section section--ruled" id="qualifikation">
+    <div class="frame frame--split">
+      <div class="sect-head reveal">
+        <h2>Ob das bei dir funktioniert, hängt an drei Dingen</h2>
+      </div>
+
+      <div class="sect-body reveal">
+        <ul class="qual-list" role="list">
+          <li><span class="mark" aria-hidden="true">–</span> <span>Du bist mindestens 18</span></li>
+          <li><span class="mark" aria-hidden="true">–</span> <span>Du wohnst in Deutschland oder Österreich und bist auch dort</span></li>
+          <li><span class="mark" aria-hidden="true">–</span> <span>Du bist bei weniger als 3 Wettanbietern registriert</span></li>
+        </ul>
+
+        <p class="qual"><strong>Trifft alles zu?</strong> Dann funktioniert es bei dir genauso wie bei den über 20.000 anderen.</p>
+
+        <p class="qual"><strong>Trifft etwas davon nicht zu?</strong> Dann spar dir die Zeit — es würde bei der Verifizierung scheitern. Das sagen wir dir lieber jetzt als in vier Wochen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Sektion 9 — Abschluss ========== -->
+  <section class="section section--deep" id="abschluss">
+    <div class="frame">
+      <div class="reveal">
+        <h2 class="close-head">500&nbsp;€. Kein Einsatz. Rund eine Stunde Aufwand.</h2>
+
+        <p style="margin-top:var(--sp-6);max-width:var(--measure)">Der einzige Grund, es nicht zu machen: Du gehörst nicht zu den drei Punkten oben.</p>
+
+        <div class="btn-wrap" style="margin-top:var(--sp-8)">
+          <a class="btn-primary" href="https://chat.whatsapp.com/Jx9WIZSXB5LIKNh1y9m5Rf" target="_blank" rel="noopener" data-cta="final">Zur WhatsApp-Gruppe</a>
+        </div>
+
+        <p class="cta-note" style="margin-top:var(--sp-3)">Kostenlos · Du zahlst nichts ein · Jederzeit verlassbar</p>
+
+        <p class="close-note">Du bist dir schon sicher und willst ohne Umweg starten? <a class="link-secondary" href="https://gksnwp.robethood.net/ts/93765/tsc?amc=con.robethood.544369.566256.15720404&amp;smc1=mitspieleranmeldung-zurrobethoodanmeldung&amp;rmd=3&amp;trg=https%3A%2F%2Fwww.robethood.net%2Fget-app-new" target="_blank" rel="noopener" data-secondary="robethood_direkt">Direkt zur Robethood-Anmeldung</a></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========== Sektion 10 — Pflichtangaben und Footer ========== -->
+<footer class="site-footer">
+  <div class="frame">
+    <p class="legal">Nur für Personen ab 18 Jahren. Glücksspiel kann süchtig machen. Hilfe und Beratung: BZgA, www.check-dein-spiel.de, kostenlose Hotline 0800 1 37 27 00.</p>
+
+    <p class="legal">Levi Breitenthaler<br>Doktor Robert Graf Straße 30, 8010 Graz, Österreich</p>
+
+    <p class="footer-meta">
+      <span class="tag">Werbung / Anzeige</span>
+      <span aria-hidden="true">·</span>
+      <a href="impressum.html">Impressum</a>
+      <span aria-hidden="true">·</span>
+      <a href="datenschutz.html">Datenschutz</a>
+    </p>
+  </div>
+</footer>
+
+<!-- ========== Sticky-CTA-Leiste ========== -->
+<div class="sticky-cta">
+  <a class="btn-primary" href="https://chat.whatsapp.com/Jx9WIZSXB5LIKNh1y9m5Rf" target="_blank" rel="noopener" data-cta="sticky">Zur WhatsApp-Gruppe</a>
+</div>
+
+<script>
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)");
+
+  function track(name, props) {
+    if (window.plausible) window.plausible(name, { props });
+  }
+
+  /* FAQ: natives <details> für Semantik, JS nur für die Höhenanimation. */
+  document.querySelectorAll(".faq").forEach((d) => {
+    const body = d.querySelector(".faq-body");
+
+    d.addEventListener("toggle", () => {
+      if (d.open) track("faq_open", { frage: d.dataset.faq });
+    });
+
+    d.querySelector("summary").addEventListener("click", (e) => {
+      if (reduce.matches) return;          // Systemwunsch respektieren
+      if (d.classList.contains("is-animating")) { e.preventDefault(); return; }
+      e.preventDefault();
+      d.classList.add("is-animating");
+
+      if (d.open) {                        // schließen
+        body.style.height = body.scrollHeight + "px";
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          body.style.height = "0px";
+        }));
+        body.addEventListener("transitionend", () => {
+          d.open = false;
+          body.style.height = "";
+          d.classList.remove("is-animating");
+        }, { once: true });
+      } else {                             // öffnen
+        d.open = true;
+        const target = body.scrollHeight;
+        body.style.height = "0px";
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          body.style.height = target + "px";
+        }));
+        body.addEventListener("transitionend", () => {
+          body.style.height = "";          // wieder auto, für Reflow
+          d.classList.remove("is-animating");
+        }, { once: true });
+      }
+    });
+  });
+
+  /* Dezente Einblendung. Einmalig pro Element, danach abgemeldet.
+     Läuft nur, wenn das Inline-Skript im <head> .js-anim gesetzt hat. */
+  if (document.documentElement.classList.contains("js-anim")) {
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      }
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0 });
+
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+  }
+
+  /* Sticky-Leiste einblenden, sobald der Hero verlassen wurde. Einmalig, nicht pulsierend. */
+  const hero = document.querySelector(".hero");
+  const bar  = document.querySelector(".sticky-cta");
+  if (hero && bar && "IntersectionObserver" in window) {
+    new IntersectionObserver(([e]) => {
+      bar.classList.toggle("is-visible", !e.isIntersecting);
+    }, { threshold: 0 }).observe(hero);
+  }
+
+  /* Rückkehr aus Impressum/Datenschutz an dieselbe Stelle.
+     Bewusst OHNE document.referrer: der ist bei file://-Aufrufen leer
+     (lokaler Doppelklick) und unter strengen Referrer-Policies ebenfalls.
+     Die Position reist stattdessen im Link mit — #zurueck=1234 — und
+     liegt zusätzlich im sessionStorage, wo Storage verfügbar ist. */
+  const POS = "rb:pos";
+
+  document.querySelectorAll('a[href$="impressum.html"], a[href$="datenschutz.html"]')
+    .forEach((a) => {
+      const base = a.getAttribute("href").split("#")[0];
+      a.addEventListener("click", () => {
+        // Das href wird erst nach dem Event-Dispatch ausgelesen.
+        const y = Math.round(scrollY);
+        a.setAttribute("href", base + "#zurueck=" + y);
+        try { sessionStorage.setItem(POS, String(y)); } catch (e) {}
+      });
+    });
+
+  let target = null;
+  const back = /^#zurueck=(\d+)$/.exec(location.hash);
+  if (back) {
+    target = +back[1];
+    history.replaceState(null, "", location.pathname + location.search);
+  } else {
+    try {
+      const saved = sessionStorage.getItem(POS);
+      if (saved !== null) target = parseInt(saved, 10) || 0;
+    } catch (e) {}
+  }
+  try { sessionStorage.removeItem(POS); } catch (e) {}   // nur einmal einlösen
+
+  if (target !== null) {
+    /* Nur für diesen einen Aufruf: die browsereigene Wiederherstellung
+       abschalten, sonst überschreibt sie unsere Position nach dem Laden.
+       Danach zurück auf "auto", damit Vor/Zurück weiter nativ läuft. */
+    const mode = history.scrollRestoration;
+    try { history.scrollRestoration = "manual"; } catch (e) {}
+    scrollTo(0, target);
+    addEventListener("load", () => {
+      try { history.scrollRestoration = mode || "auto"; } catch (e) {}
+    }, { once: true });
+  }
+
+  /* Beim Zurück über den Browser stellt der bfcache die Position selbst
+     wieder her — dann muss der gemerkte Wert weg, sonst wirkt er beim
+     nächsten Reload nach. */
+  addEventListener("pageshow", (e) => {
+    if (e.persisted) { try { sessionStorage.removeItem(POS); } catch (err) {} }
+  });
+
+  /* Klick-Tracking */
+  document.querySelectorAll("[data-cta]").forEach((el) =>
+    el.addEventListener("click", () => track("cta_click", { position: el.dataset.cta })));
+  document.querySelectorAll("[data-secondary]").forEach((el) =>
+    el.addEventListener("click", () => track("secondary_click", { target: el.dataset.secondary })));
+
+  /* Scrolltiefe und Zeit bis zum ersten Scroll */
+  const marks = [25, 50, 75, 100], done = {}, t0 = Date.now();
+  let first = false, ticking = false;
+  addEventListener("scroll", () => {
+    if (!first) {
+      first = true;
+      track("time_to_first_scroll", { seconds: String(Math.round((Date.now() - t0) / 1000)) });
+    }
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      const max = document.documentElement.scrollHeight - innerHeight;
+      const pct = max > 0 ? (scrollY / max) * 100 : 100;
+      for (const m of marks) {
+        if (!done[m] && pct >= m - 0.5) { done[m] = 1; track("scroll_depth", { depth: m + "%" }); }
+      }
+    });
+  }, { passive: true });
+})();
+</script>
+
+<!-- [[DOMAIN]] — Platzhalter: echte Domain eintragen -->
+<script defer data-domain="[[DOMAIN]]"
+        src="https://plausible.io/js/script.tagged-events.outbound-links.js"></script>
+
+</body>
+</html>
