@@ -4,11 +4,12 @@ Arbeitsstand der Landingpage zur Abstimmung. Kein Livebetrieb.
 
 ## Ansehen
 
-Die Seite läuft über GitHub Pages. Der Link steht in den Repository-Einstellungen
-unter **Settings → Pages**, sobald Pages aktiviert ist.
+Oben auf dieser Seite auf **Code → Download ZIP**, das Archiv entpacken und
+`index.html` doppelklicken. Mehr ist nicht nötig: Alle Pfade sind relativ, es
+gibt keinen Build und keinen Server. Die Seite läuft vollständig offline,
+Videos eingeschlossen.
 
-Lokal geht es auch: `index.html` im Browser öffnen. Alle Pfade sind relativ,
-ein Server ist nicht nötig.
+Wer mit git arbeitet, kann stattdessen klonen und `index.html` öffnen.
 
 ## Was drin ist
 
@@ -27,7 +28,9 @@ Videomaterial in unter 300 KB auf.
 
 **Bitte auch am Handy ansehen.** Nahezu der gesamte Traffic kommt aus mobilen
 In-App-Browsern; die Seite ist dafür gebaut. Am Desktop steht das Hero-Video
-rechts neben der Überschrift, am Handy rückt es über den Button.
+rechts neben der Überschrift, am Handy rückt es über den Button. Am Rechner
+lässt sich das mit den Entwicklerwerkzeugen des Browsers nachstellen
+(F12, dann die Geräteansicht).
 
 ## Noch offen
 
